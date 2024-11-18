@@ -12,7 +12,16 @@ jobs:
       # экшен — выполняет какую-то задачу
       # checkout — клонирует репозиторий
       - uses: actions/checkout@v4
+      # https://github.com/actions/setup-node
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          cache: 'npm' # ускоряет повторные сборки
+      - run: npm ci
+      - run: npm test
+
       # run – произвольная bash-команда
       - run: make setup
       - run: make test
       - run: make lint
+      - uses: hexlet-components/hello-from-hexlet-action@release
